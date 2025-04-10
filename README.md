@@ -7,5 +7,5 @@ If what you are looking for is Casio exploits to get its full power, here are so
 - https://community.casiocalc.org/
 
 ## Languages
-- en (todo)
+- [en](./docs/en)
 - [vn](./docs/vn)
