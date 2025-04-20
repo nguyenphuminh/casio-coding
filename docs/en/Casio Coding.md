@@ -107,6 +107,16 @@ $$Int(A + 1 - 10^{-10})$$
 
 The idea is that if a number is 0 then 0 + 0.999...9 rounded down is still 0, but a number from 0.000...01 and above plus 0.999...9 will result in a number greater than or equal to 1, rounded down to 1 (note that the amount of digits of 0.999...9 and 0.000...01 are the same). Because the Casio will only accurately represent numbers with 10 characters and below, $10^{-10}$ is good enough.
 
+#### For negatives
+
+Though, these methods only work if the number is positive. If the number is negative, you should use:
+
+$$Int(A - 0.5)$$
+
+and
+
+$$Int(A - 1 + 10^{-10})$$
+
 ### II.5. Branching and conditions
 
 In Casio, there is no if statements, so we will use maths to solve this problem. What we need to achieve is an expression where if one condition is true, returns a value, or else returns a different value. In reality, there are multiple approaches to this, but I will list out some that I use most frequently.
@@ -211,9 +221,17 @@ Then, we remove "6" to get "345". We know that 3456 / 10 = 345.6, rounded down t
 
 $$Int(\frac{123456 - 10000Int(\frac{123456}{10000})}{10})$$
 
-Abstract form with A, B being known lengths, C is the start, D is the end:
+Abstract form with A being the number, B being a known length of A, C is the start, D is the end:
 
 $$Int(\frac{A - 10^{B-C+1}Int(\frac{A}{10^{B-C+1}})}{10^{B-D}})$$
+
+Note that you can also extract child numbers in a different base, not just decimal:
+
+$$Int(\frac{A - E^{B-C+1}Int(\frac{A}{E^{B-C+1}})}{E^{B-D}})$$
+
+with E being the base you want.
+
+#### Extra example
 
 Based on that, we also have a formula to substitute a portion with a different number E:
 
