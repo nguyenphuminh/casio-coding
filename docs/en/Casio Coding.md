@@ -7,7 +7,7 @@
 
 In this document, I will be using the Casio fx580 VN X model, and you should have prior experience with programming before continuing.
 
-In reality, some Chinese have already discovered ways to arbitrarily execute low-level operations in the fx991 and fx580 before 2018.
+In reality, some Chinese engineers have already discovered ways to arbitrarily execute low-level operations in the fx991 and fx580 before 2018.
 
 What I am showing next only utilizes computation based on normal features and is not arbitrary. Thus, it will not be nearly as useful as what people have already come up with, but it is definitely easier to understand. If you want the op stuff, check out these links:
 
@@ -35,7 +35,7 @@ For instance, let's say we have a program like this:
 
 $$A + 1: B + 3$$
 
-When you press "CALC", the screen will let you type in the values of A and then B. I will set A as 1, B as 6. When run, the screen will show 2, and then 9.
+When you press "CALC", the screen will let you type in the values of A and then B. I will set A to 1, B to 6. When run, the screen will show 2, and then 9.
 
 We can also assign values for variables during execution like this:
 
@@ -51,11 +51,11 @@ So far it is still kinda useless, but we can use variables in loops in the next 
 
 ### II.3. Loops
 
-An important piece of the puzzle is loops. There are no real direct or meaningful ways to implement loops across commands in the Casio, but we can see a pattern where when all commands are run, it will jump back to first command, and more importantly, the values of variables are unchanged. Accordingly, we can utilize this behavior as a loop.
+An important piece of the puzzle is loops. There are no straightforward ways to implement loops across commands in the Casio, but we can see a pattern where when all commands are run, it will jump back to the first command, and more importantly, the values of variables are unchanged. Accordingly, we can utilize this behavior as a loop.
 
 #### Fibonacci sequence
 
-To create an example, I will use a loop to find a number in the Fibonacci sequence. If you have not already known, it is a sequence where each number is the sum of two previous numbers, and two first numbers are 0 and 1.
+To create an example, I will use a loop to find a number in the Fibonacci sequence. If you don't already know, it is a sequence where each number is the sum of two previous numbers, and two first numbers are 0 and 1.
 
 Example: 0, 1, 1, 2, 3, 5, 8, 13,...
 
@@ -93,13 +93,23 @@ The Table mode allows you to type in an equation, starting point, ending point, 
 
 Though, the most powerful functionality of Table is that you can read/edit your memory while looping by abusing the modulo operator `÷R`. Do note that we have to go through this hassle because you can not edit variables like we did above in Table.
 
-`A ÷R B` returns the integer answer of `A ÷ B` as well as the remainder and stores the answer into variable E, the remainder into variable F. This means if you want to pass some value of the previous run (call it `A`) to the next run, you can just do `A ÷R B` with B being bigger than A, and the next run will have its F updated to be A. Because B is bigger than A, `A ÷R B` will always result in 0 so it will not affect anything you write next to it which is neat.
+`A ÷R B` returns the integer answer of `A ÷ B` and stores the answer into variable E, the remainder into variable F. This means if you want to pass some value of the previous run (call it `A`) to the next run, you can just do `A ÷R 1`, and the next run will have its E updated to be A. Or you can also do `A ÷R B` with B larger than A, and the next run will have its F updated to be A.
+
+For example, I will write a program to calculate powers of 2. First store 1 into E, then switch to Table mode, then type in `f(x)=E * 2 ÷R 1`, start at 1, end at 5, and step as 1. You will see something like:
+```
+  | x | f(x) |
+1 | 1 |    2 |
+2 | 2 |    4 |
+3 | 3 |    8 |
+4 | 4 |   16 |
+5 | 5 |   32 |
+```
 
 If this section is too complicated, no worries, you can skip this and come back later because this is only useful if combined with the next concepts.
 
 ### II.4. Round numbers using Int
 
-In the Casio calculator, there is a really powerful function that I use in almost all basic operations: The Int function. It can round the number down (getting only the integer part), for example, Int(3.41) returning 3, and we can use it to implement more neat features.
+In the Casio calculator, there is a really powerful function that I use in almost all basic operations: the Int function. It can round the number down (getting only the integer part), for example, Int(3.41) returning 3, and we can use it to implement more neat features.
 
 #### Normal rounding
 
@@ -129,13 +139,13 @@ $$Int(A - 1 + 10^{-10})$$
 
 ### II.5. Branching and conditions
 
-In Casio, there is no if statements, so we will use maths to solve this problem. What we need to achieve is an expression where if one condition is true, returns a value, or else returns a different value. In reality, there are multiple approaches to this, but I will list out some that I use most frequently.
+In Casio, there are no if statements, so we will use maths to solve this problem. What we need to achieve is an expression where if one condition is true, returns a value, or else returns a different value. In reality, there are multiple approaches to this, but I will list out some that I use most frequently.
 
 #### Absolute
 
 Absolutes of numbers can be regarded as a conditional expression where if n >= 0, return n, or else return -n.
 
-We can apply this trick in certain problems, such as finding the maximum or minimum between 2 numbers. We know that the sum of their sum and difference divided by 2 results in the maximum, while the difference of their sum and difference divided by 2 results in the minium. But how can we get the positive difference without knowing which one is larger between 2 numbers? We use absolutes, as demonstrated below:
+We can apply this trick in certain problems, such as finding the maximum or minimum between 2 numbers. We know that the sum of their sum and difference divided by 2 results in the maximum, while the difference of their sum and difference divided by 2 results in the minimum. But how can we get the positive difference without knowing which one is larger between 2 numbers? We use absolutes, as demonstrated below:
 
 Get maximum:
 
@@ -195,25 +205,25 @@ We can do the same with the geq comparison:
 
 $$Int(\frac{tanh(A - B)tanh(C - D)tanh(E - F) + 2}{2})$$
 
-Since all equations above return 1 and 0, we can get the reversed condition simply by using 1 substracted by the result. For example, here is an equation that returns 1 if A is different from B and 0 if A is equal to B:
+Since all equations above return 1 and 0, we can get the reversed condition simply by using 1 subtracted by the result. For example, here is an equation that returns 1 if A is different from B and 0 if A is equal to B:
 
 $$1 - Int(1 - \lvert tanh(A - B) \rvert)$$
 
 #### Applications
 
-In this section, let's use what we have learnt to solve some problems relating to condtions.
+In this section, let's use what we have learnt to solve some problems relating to conditions.
 
 **Prime number check**
 
-With n being the number to verify, we loop from 2 to the square root of n, and if n is divisable by any number in the loop, n is not a prime.
+With n being the number to verify, we loop from 2 to the square root of n, and if n is divisible by any number in the loop, n is not a prime.
 
-A number is divisable by another number only if the quotient is an integer, so to check divisability, we just have to check if the rounded quotient is equal to the quotient:
+A number is divisible by another number only if the quotient is an integer, so to check divisibility, we just have to check if the rounded quotient is equal to the quotient:
 
 $$1 - Int(1 - \lvert tanh(Int(\frac{A}{x}) - \frac{A}{x}) \rvert)$$
 
-This equation will return 0 if A is divisable by x, 1 if not.
+This equation will return 0 if A is divisible by x, 1 if not.
 
-If we use the production notation, only one multiplier being 0 can make the final product 0 regardless of others. So we can plug in the equation we have come up with above in a product notation and it's complete:
+If we use the product notation, only one multiplier being 0 can make the final product 0 regardless of others. So we can plug in the equation we have come up with above in a product notation and it's complete:
 
 $$\prod\limits_{x=2}^{Int(\sqrt{A})} (1 - Int(1 - \lvert tanh(Int(\frac{A}{x}) - \frac{A}{x}) \rvert))$$
 
@@ -223,11 +233,9 @@ This will return 1 if A is a prime, 0 if not.
 
 Let's say we have number 123456, we want to slice from the third digit to the fifth digit (or 345).
 
-First, we remove "12" to get "3456". We realize that 123456 mod 10000 equals to 3456, but there is no built-in way to calculate modulo in Casio ($\div R$ does not give us a result that can be assigned to a variable or usable in sum/product), so we have this formula:
+First, we remove "12" to get "3456". We realize that 123456 mod 10000 equals to 3456, but there is no universal way to calculate modulo in Casio ($\div R$ does not give us a result that can be assigned to a variable or usable in sum/product), so we have this formula:
 
 $$123456 - 10000Int(\frac{123456}{10000})$$
-
-Note: You can use the `÷R` operator to calculate the remainder and access it through the F variable too, but note that it will not work in sigmas or the product notation.
 
 Then, we remove "6" to get "345". We know that 3456 / 10 = 345.6, rounded down to 345, so now we have:
 
