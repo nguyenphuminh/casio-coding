@@ -69,7 +69,7 @@ Press "CALC", set A=0, B=1, C=0, press "=" continuously, each time we jump back 
 
 #### The problem with automation
 
-In reality, if we have to press "=" continuously, it would be really tedious. Therefore, when coding in the Casio, we should try bringing the problem down to a simple equation that does not need loops, or try the following single-equation loops.
+In reality, if we have to press "=" continuously, it would be really tedious. Therefore, when coding in the Casio, we should try bringing the problem down to a simple equation that does not need loops, or try the next looping methods.
 
 #### Summation and product notation
 
@@ -86,6 +86,16 @@ $$\prod\limits_{x=start}^{end} (\text{some equation})$$
 If you have not already known, the summation notation will loop from x=start to x=end, with an increment of 1. For each loop, we will substitute the current x into "some_equation", then we will add the equation to the sum result. The pi/product notation works the same way, but it calculates the product by continuous multiplication.
 
 A huge bottleneck of these two is that we can not change the value of variables inside the loop, there is no way to mutate the state, and inherently they are just calculating sum and product. Though, they can serve some interesting purposes, as exemplified in the next section on conditions.
+
+#### Tables and modulo
+
+The Table mode allows you to type in an equation, starting point, ending point, and step. Then, it will calculate all results of that equation with x from `start` to `end`, incrementing x by `step` per run. This is essentially a loop similar to what we do with summation/product notation above, but we get to see all results and can set our desired step here, while those force the step to be 1.
+
+Though, the most powerful functionality of Table is that you can read/edit your memory while looping by abusing the modulo operator `÷R`. Do note that we have to go through this hassle because you can not edit variables like we did above in Table.
+
+`A ÷R B` returns the integer answer of `A ÷ B` as well as the remainder and stores the answer into variable E, the remainder into variable F. This means if you want to pass some value of the previous run (call it `A`) to the next run, you can just do `A ÷R B` with B being bigger than A, and the next run will have its F updated to be A. Because B is bigger than A, `A ÷R B` will always result in 0 so it will not affect anything you write next to it which is neat.
+
+If this section is too complicated, no worries, you can skip this and come back later because this is only useful if combined with the next concepts.
 
 ### II.4. Round numbers using Int
 
@@ -216,6 +226,8 @@ Let's say we have number 123456, we want to slice from the third digit to the fi
 First, we remove "12" to get "3456". We realize that 123456 mod 10000 equals to 3456, but there is no built-in way to calculate modulo in Casio ($\div R$ does not give us a result that can be assigned to a variable or usable in sum/product), so we have this formula:
 
 $$123456 - 10000Int(\frac{123456}{10000})$$
+
+Note: You can use the `÷R` operator to calculate the remainder and access it through the F variable too, but note that it will not work in sigmas or the product notation.
 
 Then, we remove "6" to get "345". We know that 3456 / 10 = 345.6, rounded down to 345, so now we have:
 

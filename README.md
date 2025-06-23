@@ -8,4 +8,4 @@ If what you are looking for is Casio exploits to get its full power, here are so
 
 ## Languages
 - [en](./docs/en)
-- [vn](./docs/vn)
+- [vn](./docs/vn) (no longer maintained)
