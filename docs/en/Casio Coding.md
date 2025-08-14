@@ -107,6 +107,10 @@ For example, I will write a program to calculate powers of 2. First store 1 into
 
 If this section is too complicated, no worries, you can skip this and come back later because this is only useful if combined with the next concepts.
 
+#### Spreadsheet
+
+The spreadsheet is extremely powerful, like tables on steroids, but this feature only comes in some models, like the fx880btg or the fx991ex. Combining spreadsheets and the next concepts in this document would result in the closest "normal" coding system possible. I recommend reading official tutorials from Casio about this feature, and if you are already good with Excel or something similar, that would be nice too.
+
 ### II.4. Round numbers using Int
 
 In the Casio calculator, there is a really powerful function that I use in almost all basic operations: the Int function. It can round the number down (getting only the integer part), for example, Int(3.41) returning 3, and we can use it to implement more neat features.
