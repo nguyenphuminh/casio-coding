@@ -213,6 +213,14 @@ Since all equations above return 1 and 0, we can get the reversed condition simp
 
 $$1 - Int(1 - \lvert tanh(A - B) \rvert)$$
 
+**Logical operators**
+
+Extending from that, we have:
+
+* AND: $AB$
+* OR: $GCD(A,B)$
+* NOT: $1-A$
+
 #### Applications
 
 In this section, let's use what we have learnt to solve some problems relating to conditions.
